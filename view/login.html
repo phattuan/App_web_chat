@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--=============== FAVICON ===============-->
+
+    <!--=============== ICON ===============-->
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!--===============  ===============-->
+
+    <title>Login Chat Web</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <div class="border_back_home">
+      <a href="/"><h1>home</h1></a>
+    </div>
+    <section class="log_in">
+      <img
+        src="./img/undraw_mobile_testing_re_w7yb - Copy.svg"
+        alt=""
+      />
+      <div class="login_register">
+        <div class="container_login">
+          <h1>Log in</h1>
+          <div class="container_form">
+            <form class="form_log_in">
+              <div class="container_username container_elemt">
+                <p>user name</p>
+                <input type="text" placeholder="Your Name" id="username" />
+              </div>
+              <div class="container_submit_register container_elemt">
+                <div id="butt_login" class="border_submit">
+                  <p>login</p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/socket.io/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./login.js"></script>
+    
+  </body>
+</html>

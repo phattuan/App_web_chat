@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--=============== FAVICON ===============-->
+
+    <!--=============== ICON ===============-->
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!--===============  ===============-->
+
+    <title>Web Chat Tp</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav_left nav">
+        <a href="#home"><li>home</li></a>
+        <a href="#information"><li>information</li></a>
+      </nav>
+      <nav class="nav_right nav">
+        <a href="#contact"><li>contact</li></a>
+        <a href="/login"><li>log in</li></a>
+      </nav>
+      <div class="border_logo">
+        <img src="./img/code.png" alt="" />
+      </div>
+      <div class="container_icon_header">
+        <i class="bx bx-menu" id="butt_menu"></i>
+        <i class="bx bxs-user-circle" id="butt_user"></i>
+      </div>
+    </header>
+    <!-- ================ home start ================ -->
+    <section class="home">
+      <div class="container_pane_wel">
+        <img
+          src="./img/undraw_card_postal_-5-wvw.svg"
+          id="card_postal"
+          alt=""
+        />
+        <h1 id="title_wel">Welcome to App Chat Tp</h1>
+      </div>
+      <div class="container_review_app">
+        <h1>App Chat TP</h1>
+        <p>
+          Ứng dụng được tạo ta nhằm mục đích kết nối mọi người lại với nhau.
+        </p>
+        <p>
+          Tại đây mọi người có thể tự do trò chuyện với nhau thông qua các room
+          được khỏi tạo.
+        </p>
+        <img src="./img/undraw_online_dating_re_hu03.svg" alt="" />
+      </div>
+    </section>
+    <!-- ================== home end =================== -->
+
+    <!-- =================== icon link start ======================== -->
+    <section class="container_icon_link">
+      <a href="#"><i class="bx bxl-github"></i></a>
+      <a href="#"><i class="bx bxl-messenger"></i></a>
+      <a href="#"><i class="bx bxs-contact"></i></a>
+    </section>
+    <!-- ======================= information start ================= -->
+    <section class="information">
+      <div class="border_title_information">
+        <h1>product information</h1>
+      </div>
+      <div class="container_inf">
+        <div class="container_inf_1 container_inf_chill">
+          <img src="./img/undraw_static_assets_rpm6.svg" alt="" />
+          <div class="container_content_inf">
+            <div class="border_title_fe">
+              <p>Phần Fontend của App được xây dựng dựa trên:</p>
+            </div>
+            <div class="container_chill_fe container_chill">
+              <div class="border_content_html5 container_chill_fe_be">
+                <p>Html5</p>
+              </div>
+              <div class="border_content_scss container_chill_fe_be">
+                <p>Scss/Css</p>
+              </div>
+              <div class="border_content_js container_chill_fe_be">
+                <p>Javascript</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_inf_2 container_inf_chill">
+          <img src="./img/undraw_server_cluster_jwwq.svg" alt="" />
+          <div class="container_content_inf">
+            <div class="border_title_be">
+              <p>Phần Backend của App được xây dựng trên:</p>
+            </div>
+            <div class="container_chill_be container_chill">
+              <div class="border_content_nodejs container_chill_fe_be">
+                <p>Nodejs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== information end ====================== -->
+    <section class="contact">
+      <div class="border_contact">
+        <h1>contact</h1>
+      </div>
+      <div class="container_contact">
+        <img src="./img/undraw_online_friends_re_eqaj.svg" alt="">
+        <div class="container_content_contact">
+          <p>https://www.facebook.com/HTP.software.programmer</p>
+          <p>https://github.com/phattuan</p>
+          <p>bavytuanphat@gmail.com</p>
+          <p>+84: 362376514</p>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== information end =================== -->
+
+    <!-- ===================== copyright start ==================== -->
+    <section class="copyright">
+      <h1>copyright &ensp; by ho tuan phat</h1>
+      <i class='bx bxs-copyright'></i>
+    </section>
+    <!-- ===================== copyright end ==================== -->
+    <!-- ======================== link room chat start ==================== -->
+    <section class="container_link_room_chat">
+      <p>Hãy cùng tham gia Chat</p>
+      <p>Ấn vào đây !</p>
+    </section>
+    <!-- ======================== link room chat end ==================== -->
+
+    <script src="/socket.io/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/home.js"></script>
+   
+  </body>
+</html>
