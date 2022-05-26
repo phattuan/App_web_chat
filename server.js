@@ -74,9 +74,10 @@ io.on('connection', function (client) {
         client.broadcast.emit('userDisconnect', user);
 
         listUser = listUser.filter((remowUser) => {
-            return remowUser.idUser !== idUser;
+            return  remowUser.userName !== user;
         })
         client.broadcast.emit('sendName', listUser);
+        console.log(listUser)
 
     })
 })

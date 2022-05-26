@@ -35,8 +35,11 @@ function setName() {
   if (nameUser.length != 0) {
     socket.emit('sendName', nameUser);
     socket.on('errUserName', () => {
-      alert('ten cua ban bi trung !');
-      window.location = `http://localhost:7788/chat`
+      alert('ten cua ban bi trung !'); 
+       input_yourname.style.display = 'flex';
+      butt_accept_name.style.display = 'flex';
+      butt_disconnect.style.display = 'none'
+
     })
     user_name.innerHTML = nameUser;
     socket.on('imageUser',(idImage)=>{
@@ -46,7 +49,6 @@ function setName() {
     alert('nhap lai your name !!!')
     window.location = `http://localhost:7788/chat`
   }
-  butt_accept_name.removeEventListener('click', setName);
   input_yourname.style.display = 'none';
   butt_accept_name.style.display = 'none';
   butt_disconnect.style.display = 'flex'
@@ -121,6 +123,9 @@ function setName() {
     }
   })
 
+  socket.on('userDisconnect',function(userDis){
+
+  })
 
 }
 //======= disconnect server chat =======
