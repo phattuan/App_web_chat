@@ -11,12 +11,16 @@ let input_mess = document.querySelector('.chat .pane_right .container_tools_iput
 let container_chat = document.querySelector('.chat .pane_right .container_content_chat')
 let butt_disconnect = document.querySelector('.chat .pane_right .container_head_pane_right .boder_log_out')
 let page_chat = document.querySelector('.chat')
+let back_webchat_home = document.querySelector('.chat .pane_left .container_head_pane_left h1');
+let image_user = document.querySelector('.chat .pane_right .container_head_pane_right .boder_img_user');
 //====== socket client ==========
 // const socket = io.connect('http://localhost:5000');
 
 // socket.on('connect', function (data) {
 //   socket.emit('join', 'hello server !!!')
 // })
+
+
 
 //============= set name user =========
 butt_accept_name.addEventListener('click', setName);
@@ -35,6 +39,9 @@ function setName() {
       window.location = `http://localhost:7788/chat`
     })
     user_name.innerHTML = nameUser;
+    socket.on('imageUser',(idImage)=>{
+      image_user.insertAdjacentHTML('beforeend',`<img src="./img/user_${idImage}.png" alt="" />`)
+    })
   } else {
     alert('nhap lai your name !!!')
     window.location = `http://localhost:7788/chat`
@@ -42,14 +49,16 @@ function setName() {
   butt_accept_name.removeEventListener('click', setName);
   input_yourname.style.display = 'none';
   butt_accept_name.style.display = 'none';
+  butt_disconnect.style.display = 'flex'
 
   socket.on('sendName', function (listuser) {
     add_user_onl.innerHTML = '';
     listuser.forEach(element => {
       if (element.userName !== nameUser) {
+
         add_user_onl.insertAdjacentHTML('beforeend', ` <div class="user">
           <div class="border_img_user">
-            <img src="./img/user_${Math.ceil(Math.random() * 10)}.png" alt=""/>
+          <img src="./img/user_${element.idImageUser}.png" alt=""/>
           </div>
           <div class="border_name_user">
             <p>${element.userName}</p>
@@ -64,11 +73,11 @@ function setName() {
             <p id="content_notification">${notif}</p>
         </section>
       `)
-      setTimeout(() => {
-       let container_notif =  document.querySelector('.chat .container_notification');
-       container_chat.removeChild(container_notif);
-      }, 3000);
-    
+    setTimeout(() => {
+      let container_notif = document.querySelector('.chat .container_notification');
+      container_chat.removeChild(container_notif);
+    }, 3000);
+
   })
 
 
@@ -121,3 +130,8 @@ function disconnectServer() {
   window.location = `http://localhost:7788`
 }
 
+// ======== back page home ========
+back_webchat_home.addEventListener('click', backPageHome)
+function backPageHome() {
+  window.location = `http://localhost:7788`
+}

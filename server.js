@@ -1,7 +1,6 @@
-require('dotenv').config();
 
 var express = require('express');
-
+require('dotenv/config')
 var webapp = express();
 var server = require('http').createServer(webapp);
 
@@ -24,7 +23,8 @@ webapp.use(express.static(__dirname + '/view'));
 webapp.use(express.static(__dirname + '/styles'));
 webapp.use(express.static(__dirname + '/js'));
 
-var listuser = [];
+var listUser = [];
+var idUser = 0;
 io.on('connection', function (client) {
     var user = '';
     // console.log('client connect ...')
@@ -33,28 +33,31 @@ io.on('connection', function (client) {
     });
 
     client.on('sendName', function (nameUser) {
+        var idImageUser = Math.ceil(Math.random() * 10);
         user = nameUser;
-        if (listuser.length == 0) {
+        idUser++;
+        client.emit('imageUser',idImageUser);
+        if (listUser.length == 0) {
             console.log(nameUser + ' ' + client.id + ` connect server !!!`)
-            listuser.push({ userName: user })
-            client.emit('sendName', listuser);
-            client.broadcast.emit('sendName', listuser)
+            listUser.push({ userName: user, idImageUser: idImageUser, idUser: idUser })
+            client.emit('sendName', listUser);
+            client.broadcast.emit('sendName', listUser)
             client.emit('Notification', 'Bạn đã tham gia room chat thành công')
-            console.log(listuser)
+            console.log(listUser)
 
         } else {
-            let ktr_userName = listuser.filter(e => {
+            let ktr_userName = listUser.filter(e => {
                 return e.userName === nameUser
             })
             if (ktr_userName.length !== 0) {
                 client.emit('errUserName')
             } else {
                 console.log(nameUser + ` connect server !!!`)
-                listuser.push({ userName: user })
-                client.emit('sendName', listuser);
-                client.broadcast.emit('sendName', listuser)
+                listUser.push({ userName: user, idImageUser: idImageUser, idUser: idUser })
+                client.emit('sendName', listUser);
+                client.broadcast.emit('sendName', listUser)
                 client.emit('Notification', 'Bạn đã tham gia room chat thành công')
-                console.log(listuser)
+                console.log(listUser)
             }
         }
 
@@ -70,11 +73,12 @@ io.on('connection', function (client) {
         client.emit('userDisconnect', user);
         client.broadcast.emit('userDisconnect', user);
 
-        listuser = listuser.filter((remowUser) => {
-            return remowUser.userName !== user;
+        listUser = listUser.filter((remowUser) => {
+            return remowUser.idUser !== idUser;
         })
-        client.broadcast.emit('sendName', listuser);
+        client.broadcast.emit('sendName', listUser);
+
     })
 })
-server.listen(7788);
+server.listen(process.env.PORT);
 

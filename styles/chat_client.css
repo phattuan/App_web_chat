@@ -138,7 +138,7 @@ body {
 }
 
 .chat .pane_left .container_user .user .border_img_user::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 45%;
   left: 0;
@@ -241,6 +241,7 @@ body {
 }
 
 .chat .pane_right .container_head_pane_right .boder_log_out {
+  display: none;
   position: absolute;
   width: 40px;
   height: 40px;
@@ -283,7 +284,9 @@ body {
 }
 
 .chat .pane_right .container_content_chat .container_content_mess_client #name_client {
-  width: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   color: deeppink;
   text-align: center;
 }
@@ -361,5 +364,73 @@ body {
   text-align: center;
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
+}
+
+@media (max-width: 1260px) {
+  .chat .pane_left .container_user .user {
+    gap: 1rem;
+  }
+  .chat .pane_left .container_user .user .border_name_user p {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 1050px) {
+  .chat .pane_left .container_user .user {
+    gap: 1rem;
+  }
+  .chat .pane_left .container_user .user .border_name_user {
+    padding: 8px 0;
+  }
+  .chat .pane_left .container_user .user .border_name_user p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 940px) {
+  .chat .pane_left {
+    overflow: visible;
+  }
+  .chat .pane_left .container_user {
+    overflow: visible;
+  }
+  .chat .pane_left .container_user .user {
+    overflow: visible;
+  }
+  .chat .pane_left .container_user .user .border_name_user {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    background: #deb887;
+    border-radius: 1rem;
+    padding: 5px;
+    -webkit-transform: translateX(15vw);
+            transform: translateX(15vw);
+    z-index: 10;
+    overflow: visible;
+  }
+  .chat .pane_left .container_user .user .border_name_user::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    z-index: -20;
+    -webkit-transform: translateX(-8px) rotate(45deg);
+            transform: translateX(-8px) rotate(45deg);
+    background: #deb887;
+  }
+  .chat .pane_left .container_user .user {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .chat .pane_left .container_user .user:hover .border_name_user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 /*# sourceMappingURL=chat_client.css.map */
