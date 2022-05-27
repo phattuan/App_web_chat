@@ -26,42 +26,47 @@ let image_user = document.querySelector('.chat .pane_right .container_head_pane_
 butt_accept_name.addEventListener('click', setName);
 const socket = io.connect(`http://localhost:7788`);
 var nameUser = ''
+var idUser = 0;
 function setName() {
   socket.on('connect', function (data) {
     socket.emit('join', 'hello server !!!')
   })
-  
+
   nameUser = input_yourname.value;
   if (nameUser.length !== null && !!nameUser.trim()) {
     socket.emit('sendName', nameUser);
-    socket.on('errUserName', () => {
+    socket.on('errUserName', (iduser) => {
       // alert('ten cua ban bi trung !');
+
       container_chat.insertAdjacentHTML('beforeend',
-      ` <section class="container_notification">
+        ` <section class="container_notification">
             <p id="content_notification">tên của bạn bị trùng !!!</p>
         </section>
       `)
-    setTimeout(() => {
-      let container_notif = document.querySelector('.chat .container_notification');
-      container_chat.removeChild(container_notif);
-    }, 3000);
+      setTimeout(() => {
+        let container_notif = document.querySelector('.chat .container_notification');
+        container_chat.removeChild(container_notif);
+        window.location = `http://localhost:7788/chat`
+      }, 3000);
+      idUser = iduser;
 
     })
     socket.on('nameSuccess', function () {
       user_name.innerHTML = nameUser;
-      butt_accept_name.removeEventListener('click',setName)
+      butt_accept_name.removeEventListener('click', setName)
       input_yourname.style.display = 'none';
       butt_accept_name.style.display = 'none';
       butt_disconnect.style.display = 'flex'
+
     })
     socket.on('imageUser', (idImage) => {
       image_user.insertAdjacentHTML('beforeend', `<img src="./img/user_${idImage}.png" alt="" />`)
     })
+
   } else {
     alert('nhap lai your name !!!')
     window.location = `http://localhost:7788/chat`
   }
-
 
   socket.on('sendName', function (listuser) {
     add_user_onl.innerHTML = '';
@@ -89,7 +94,6 @@ function setName() {
       let container_notif = document.querySelector('.chat .container_notification');
       container_chat.removeChild(container_notif);
     }, 3000);
-
   })
 
 
@@ -133,13 +137,12 @@ function setName() {
     }
   })
 
-  socket.on('userDisconnect', function (userDis) {
+  // socket.on('userDisconnect', function (userDis) {
 
-  })
+  // })
 
 }
 //======= disconnect server chat =======
-
 butt_disconnect.addEventListener('click', disconnectServer);
 function disconnectServer() {
   window.location = `http://localhost:7788`

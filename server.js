@@ -3,7 +3,6 @@ var express = require('express');
 require('dotenv/config')
 var webapp = express();
 var server = require('http').createServer(webapp);
-
 var io = require('socket.io')(server);
 
 webapp.get('/', function (req, res) {
@@ -35,8 +34,8 @@ io.on('connection', function (client) {
     client.on('sendName', function (nameUser) {
         var idImageUser = Math.ceil(Math.random() * 10);
         user = nameUser;
-        idUser++;
-        client.emit('imageUser',idImageUser);
+        idUser = client.id;
+        client.emit('imageUser', idImageUser);
         if (listUser.length == 0) {
             console.log(nameUser + ' ' + client.id + ` connect server !!!`)
             listUser.push({ userName: user, idImageUser: idImageUser, idUser: idUser })
@@ -51,7 +50,7 @@ io.on('connection', function (client) {
                 return e.userName === nameUser
             })
             if (ktr_userName.length !== 0) {
-                client.emit('errUserName')
+                client.emit('errUserName', idUser)
                 console.log(ktr_userName)
                 console.log(nameUser)
             } else {
@@ -78,12 +77,12 @@ io.on('connection', function (client) {
         client.broadcast.emit('userDisconnect', user);
 
         listUser = listUser.filter((remowUser) => {
-            return  remowUser.userName !== user;
+            return remowUser.idUser !== client.id;
         })
         client.broadcast.emit('sendName', listUser);
         console.log(listUser)
 
     })
 })
-server.listen(process.env.PORT);
+server.listen(process.env.PORT || 7788);
 
