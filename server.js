@@ -43,6 +43,7 @@ io.on('connection', function (client) {
             client.emit('sendName', listUser);
             client.broadcast.emit('sendName', listUser)
             client.emit('Notification', 'Bạn đã tham gia room chat thành công')
+            client.emit('nameSuccess');
             console.log(listUser)
 
         } else {
@@ -51,12 +52,15 @@ io.on('connection', function (client) {
             })
             if (ktr_userName.length !== 0) {
                 client.emit('errUserName')
+                console.log(ktr_userName)
+                console.log(nameUser)
             } else {
                 console.log(nameUser + ` connect server !!!`)
                 listUser.push({ userName: user, idImageUser: idImageUser, idUser: idUser })
                 client.emit('sendName', listUser);
                 client.broadcast.emit('sendName', listUser)
                 client.emit('Notification', 'Bạn đã tham gia room chat thành công')
+                client.emit('nameSuccess');
                 console.log(listUser)
             }
         }

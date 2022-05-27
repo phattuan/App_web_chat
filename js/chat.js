@@ -24,34 +24,44 @@ let image_user = document.querySelector('.chat .pane_right .container_head_pane_
 
 //============= set name user =========
 butt_accept_name.addEventListener('click', setName);
+const socket = io.connect(`http://localhost:7788`);
 var nameUser = ''
 function setName() {
-  const socket = io.connect(`http://localhost:7788`);
   socket.on('connect', function (data) {
     socket.emit('join', 'hello server !!!')
   })
-
+  
   nameUser = input_yourname.value;
-  if (nameUser.length != 0) {
+  if (nameUser.length !== null && !!nameUser.trim()) {
     socket.emit('sendName', nameUser);
     socket.on('errUserName', () => {
-      alert('ten cua ban bi trung !'); 
-       input_yourname.style.display = 'flex';
-      butt_accept_name.style.display = 'flex';
-      butt_disconnect.style.display = 'none'
+      // alert('ten cua ban bi trung !');
+      container_chat.insertAdjacentHTML('beforeend',
+      ` <section class="container_notification">
+            <p id="content_notification">tên của bạn bị trùng !!!</p>
+        </section>
+      `)
+    setTimeout(() => {
+      let container_notif = document.querySelector('.chat .container_notification');
+      container_chat.removeChild(container_notif);
+    }, 3000);
 
     })
-    user_name.innerHTML = nameUser;
-    socket.on('imageUser',(idImage)=>{
-      image_user.insertAdjacentHTML('beforeend',`<img src="./img/user_${idImage}.png" alt="" />`)
+    socket.on('nameSuccess', function () {
+      user_name.innerHTML = nameUser;
+      butt_accept_name.removeEventListener('click',setName)
+      input_yourname.style.display = 'none';
+      butt_accept_name.style.display = 'none';
+      butt_disconnect.style.display = 'flex'
+    })
+    socket.on('imageUser', (idImage) => {
+      image_user.insertAdjacentHTML('beforeend', `<img src="./img/user_${idImage}.png" alt="" />`)
     })
   } else {
     alert('nhap lai your name !!!')
     window.location = `http://localhost:7788/chat`
   }
-  input_yourname.style.display = 'none';
-  butt_accept_name.style.display = 'none';
-  butt_disconnect.style.display = 'flex'
+
 
   socket.on('sendName', function (listuser) {
     add_user_onl.innerHTML = '';
@@ -123,7 +133,7 @@ function setName() {
     }
   })
 
-  socket.on('userDisconnect',function(userDis){
+  socket.on('userDisconnect', function (userDis) {
 
   })
 
